@@ -3,7 +3,7 @@
 
 Два приложения:
 1. Консольное приложение, которое при запуске будет считывать файл с курсами валют по ссылке
-https://www.cnb.cz/en/financial_markets/foreign_exchange_market/exchange_rate_fixing/year.txt?year=2015
+https://www.cnb.cz/en/financial_markets/foreign_exchange_market/exchange_rate_fixing/year.txt?year=2017
 (год может меняться) и записывать в базу новые курсы на текущий год.
 На конкретный день для конкретной валюты в базе может быть только один курс.
 
