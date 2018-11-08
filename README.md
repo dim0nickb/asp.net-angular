@@ -15,5 +15,5 @@ https://www.cnb.cz/en/financial_markets/foreign_exchange_market/exchange_rate_fi
 На момент запуска SPA консольное приложение было запущено и наиболее актуальные курсы
 уже есть в базе.
 
-Технологии: ASP.NET WEB API, .NET Framework любой версии, 
+Технологии: ASP.NET WEB API, .NET Framework, 
 Entity Framework code first, Angular 6.
