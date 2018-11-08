@@ -1,0 +1,74 @@
+<form fxLayout="column" name="currencyRateForm" id="currencyRateForm" (ngSubmit)="onSubmitComponent()"
+    #currencyRateForm="ngForm">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Курс кроны к {{currency? currency.Name: "другой валюте"}}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content *ngIf="!currencies.length">
+          Нет данных.
+        </mat-card-content>
+        <mat-card-content *ngIf="currencies.length">
+
+            <div fxFlex>
+                <mat-form-field class="form-edit-component" fxFlex>
+                    <mat-select
+                      #currency_control
+                      placeholder="Другая валюта"
+                      (selectionChange)="onChangeCurrency($event);"
+                      required
+                      [value]="currencyId"
+                    >
+                      <mat-option *ngFor="let dep of currencies" [value]="dep.Id">
+                          {{dep.Name}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div fxFlex>
+              <mat-form-field class="form-edit-component" fxFlex>
+                <input
+                  matInput
+                  placeholder="Дата"
+                  [max]="maxReceiptDate"
+                  [min]="minReceiptDate"
+                  [formControl]="receiptDate"
+                  [matDatepicker]="receiptDateDatePicker"
+                  (dateChange)="onChangeDate($event);"
+                  (click)="$event.stopPropagation();"
+                  [(ngModel)]="exchangeDate"
+                >
+              
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="receiptDateDatePicker">
+                  </mat-datepicker-toggle>
+              
+                  <mat-datepicker #receiptDateDatePicker disabled="false"></mat-datepicker>
+                  <button mat-button *ngIf="exchangeDate" matSuffix mat-icon-button
+                    aria-label="Clear" (click)="exchangeDate=null; error=''; $event.stopPropagation();">
+                      <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-error *ngIf="receiptDate.invalid">
+                    <div>Необходимо заполнить!</div>
+                  </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxFlex *ngIf="exchangeRate && exchangeDate" class="data-view">
+                Курс кроны к {{currency.Name}} 
+                на {{getExchangeDate()}} 
+                составлял: {{exchangeRate}}
+            </div>
+            <mat-error fxFlex *ngIf="error">
+              <div>
+                  {{error}}
+              </div>
+            </mat-error>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="submit" mat-raised-button class="big-button" [disabled]="!exchangeDate || !currency">Показать</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
